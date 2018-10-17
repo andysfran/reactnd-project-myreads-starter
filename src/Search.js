@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { search } from './BooksAPI'
+import { search, update } from './BooksAPI'
 import Book from './components/Book'
 
 export default class Search extends Component {
@@ -32,18 +32,38 @@ export default class Search extends Component {
     }
   }
 
+  onUpdate = (book, status) => {
+    update({ id: book }, status)
+      .then(() => {
+        //Show Alert!
+      });
+  }
+
   renderBooks = () => {
     if (Array.isArray(this.state.results)) {
-      return this.state.results.map((book) => <Book key={book.title} {...book} />);
+    return this.state.results.map((book) => {
+      return (
+        <Book
+          key={book.title}
+          onChangeBookStatus={(book, status) => this.onUpdate(book, status)}
+          {...book}
+        />
+      );
+    });
     }
     return null;
+  }
+
+  goToIndex = () => {
+    const { history } = this.props;
+    history.push('/');
   }
 
   render() {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <a className="close-search" onClick={() => this.props.onHide()}>Close</a>
+          <a className="close-search" onClick={() => this.goToIndex()}>Close</a>
           <div className="search-books-input-wrapper">
             <input type="text" placeholder="Search by title or author" onKeyPress={e => this.submitSearch(e)} />
           </div>
