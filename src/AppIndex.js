@@ -8,6 +8,7 @@ import Bookshelf from './components/Bookshelf'
 class AppIndex extends React.Component {
   state = {
     showSearchPage: false,
+    loading: true,
     allBooks: []
   }
 
@@ -16,8 +17,10 @@ class AppIndex extends React.Component {
   }
 
   loadData = () => {
-    getAll()
-      .then((allBooks) => this.setState({ allBooks }));
+    this.setState({ loading: true }, () => {
+      getAll()
+        .then((allBooks) => this.setState({ allBooks, loading: false }));
+    })
   }
 
   hideSearch = () => {
@@ -30,7 +33,7 @@ class AppIndex extends React.Component {
   }
 
   render() {
-    const { allBooks } = this.state;
+    const { allBooks, loading } = this.state;
     return (
       <div className="app">
         <Booklist addBook={this.goToSearch}>
@@ -39,18 +42,21 @@ class AppIndex extends React.Component {
             filter="currentlyReading"
             bookList={allBooks}
             onUpdateList={this.loadData}
+            loading={loading}
           />
           <Bookshelf
             title="Want to Read"
             filter="wantToRead"
             bookList={allBooks}
             onUpdateList={this.loadData}
+            loading={loading}
           />
           <Bookshelf
             title="Read"
             filter="read"
             bookList={allBooks}
             onUpdateList={this.loadData}
+            loading={loading}
           />
         </Booklist>
       </div>

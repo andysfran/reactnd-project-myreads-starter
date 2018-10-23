@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "lodash": "^4.17.11",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-notifications": "^1.4.3",
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { NotificationManager } from 'react-notifications'
 import Book from './Book'
+import LoadingBook from './LoadingBook'
 import { update } from '../BooksAPI'
 
 export default class Bookshelf extends Component {
@@ -7,12 +9,17 @@ export default class Bookshelf extends Component {
   onUpdate = (book, status) => {
     update({id: book}, status)
       .then(() => {
+        NotificationManager.success('Book moved successfully!');
         this.props.onUpdateList();
       });
   }
 
   renderBooks = () => {
-    const { bookList } = this.props;
+    const { bookList, loading } = this.props;
+    if (loading) {
+      return <LoadingBook />;
+    }
+
     if (Array.isArray(bookList) && bookList.length > 0) {
       return bookList.filter((book) => book.shelf === this.props.filter)
         .map((book) => {

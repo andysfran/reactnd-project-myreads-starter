@@ -132,6 +132,14 @@ body, .app {
 .book-authors {
   color: #999;
 }
+.book-title-disabled {
+  width: 100%;
+  background-color: #dadada;
+}
+.book-authors-disabled {
+  width: 100%;
+  background-color: #999;
+}
 
 .book-top {
   position: relative;
@@ -159,6 +167,9 @@ body, .app {
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+.book-shelf-changer-disabled {
+  background-color: #adbbac;
 }
 
 /* book cover */
