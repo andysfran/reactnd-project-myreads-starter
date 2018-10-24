@@ -1,6 +1,6 @@
 # MyReads Project
 
-This is a complement of the starter template for the final assessment project for Udacity's React Fundamentals course. 
+This project are with Material design, notifications and react router to take care of the routes. For the books, I decided to stay with original CSS given from Udacity. Everything work's fine and we have two pages: The index page shows the books of 3 shelfs(Currently reading, read, want to read) and the search pages, who show a searchbar and you can type any of the categories informed bellow in the "Important" section.
 
 ## Run the project
 
