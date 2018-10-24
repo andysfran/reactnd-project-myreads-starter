@@ -4,7 +4,7 @@ This project are with Material design, notifications and react router to take ca
 
 ## Run the project
 
-To get started developing right away:
+To get started you have to follow 2 steps:
 
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
