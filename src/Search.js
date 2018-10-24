@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import { debounce } from 'lodash'
 import {NotificationManager} from 'react-notifications'
-import { search, update } from './BooksAPI'
+import { getAll, search, update } from './BooksAPI'
 import Book from './components/Book'
 import LoadingBook from './components/LoadingBook'
 
 export default class Search extends Component {
 
-    state = {
-      text: '',
-      loading: false,
-      results: []
-    }
+  state = {
+    text: '',
+    loading: false,
+    bookList: this.props.location.state.allBooks,
+    results: []
+  }
+
+  loadData = () => {
+    getAll()
+      .then((allBooks) => this.setState({ bookList: allBooks }));
+  }
 
   submitSearch = debounce((text) => {
     if (text === "") {
@@ -51,11 +57,17 @@ export default class Search extends Component {
     if (Array.isArray(this.state.results)) {
       if (this.state.results.length > 0) {
         return this.state.results.map((book, index) => {
+          const { bookList } = this.state;
+          let myBook = book;
+          if (Array.isArray(bookList)) {
+            const bookFound = bookList.find((myBook) => myBook.id === book.id);
+            myBook = bookFound !== undefined? bookFound : book;
+          }
           return (
             <Book
               key={index}
               onChangeBookStatus={(book, status) => this.onUpdate(book, status)}
-              {...book}
+              {...myBook}
             />
           );
         });

@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 
 export default class BookList extends Component {
-
-  goToSearch = () => {
-    const { history } = this.props;
-    history.push('/search');
-  }
-
+  
   render() {
     return (
       <div className="list-books">

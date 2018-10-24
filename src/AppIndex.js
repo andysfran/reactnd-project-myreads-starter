@@ -30,7 +30,11 @@ class AppIndex extends React.Component {
 
   goToSearch = () => {
     const { history } = this.props;
-    history.push('/search');
+    const { allBooks } = this.state;
+    history.push({
+      pathname: '/search',
+      state: { allBooks }
+    });
   }
 
   render() {
