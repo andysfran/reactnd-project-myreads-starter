@@ -4,7 +4,7 @@ export default () => {
 	let fakeItems = [];
 	for (let i =0; i < 5; i++) {
 		fakeItems.push(
-			<li>
+			<li key={i}>
 				<div className="book">
 					<div className="book-top">
 					<div className="book-cover" style={{ width: 128, height: 193 }}></div>
